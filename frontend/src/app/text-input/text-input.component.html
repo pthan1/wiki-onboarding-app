@@ -1,0 +1,29 @@
+<ng-container class="text-input">
+  <div class="input-container">
+    <input type="text" [formControl]="control" name="control" required="" />
+    <input
+      *ngIf="label !== 'Password'"
+      type="text"
+      [formControl]="control"
+      name="control"
+      required=""
+    />
+    <input
+      *ngIf="label === 'Password'"
+      type="password"
+      [formControl]="control"
+      name="control"
+      required=""
+    />
+    <label for="control">{{ label }}</label>
+  </div>
+  <ng-container *ngIf="control.touched && control.errors" class="error">
+    <div class="error" *ngIf="control.errors['required']">
+      A {{ label }} is required
+    </div>
+    <div class="error" *ngIf="control.errors['minlength']">
+      {{ label }} must be at least
+      {{ control.errors["minlength"].minlength }} characters long.
+    </div>
+  </ng-container>
+</ng-container>

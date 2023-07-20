@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<app-overlay>
+  <div class="new-announcement-form-container">
+    <form
+      class="new-announcement"
+      [formGroup]="newAnnouncementForm"
+      (ngSubmit)="onNewAnnouncementFormSubmit()"
+    >
+      <app-text-input
+        [control]="$any(newAnnouncementForm.get('title'))"
+        label="Title"
+      ></app-text-input>
+      <app-text-input
+        [control]="$any(newAnnouncementForm.get('message'))"
+        label="Message"
+      ></app-text-input>
+      <br />
+      <div class="submit-btn-container">
+        <button
+          class="inputs button"
+          id="modal-submit-btn"
+          type="submit"
+          [disabled]="newAnnouncementForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</app-overlay>
+
+<div class="announcements">
+  <div class="announcements">
+    <h1>Announcements</h1>
+    <div class="announcements-heading">
+      <div class="announcements-heading-right">
+        <button
+          *ngIf="user && user.admin"
+          class="btn-link"
+          (click)="showNewAnnouncementModal()"
+        >
+          New
+        </button>
+      </div>
+    </div>
+
+    <div class="center">
+      <hr />
+      <app-announcement-card
+        *ngFor="let announcement of announcements"
+        [announcement]="announcement"
+      ></app-announcement-card>
+    </div>
+  </div>
+</div>

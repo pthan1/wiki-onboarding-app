@@ -1,0 +1,40 @@
+a{
+    text-decoration: none;
+    color: #1BA098
+}
+
+nav{
+    /* display: flex; */
+    flex-direction: row;
+    justify-content: space-evenly;
+    color: red; 
+    font-size: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+.link-container{
+    float:right;
+    width: auto;
+    height: auto;
+    margin-top: 13px;
+}
+img{
+    height: 70px;
+    width: 70px;
+    float: left;
+}
+
+.nav-logo{
+    width:auto;
+    height:auto
+}
+
+.admin{
+    float:left;
+    padding-top: 13px;
+    margin-left: 10px;
+}
+

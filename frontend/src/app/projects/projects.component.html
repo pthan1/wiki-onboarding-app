@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+  <app-overlay>
+    <div class="form-container">
+      <form
+        class="edit-form"
+        [formGroup]="editProjectForm"
+        (ngSubmit)="projectFormSubmit()"
+      >
+        <app-text-input
+          [control]="$any(editProjectForm.get('name'))"
+          label="Project Name"
+        ></app-text-input>
+        <app-text-input
+          [control]="$any(editProjectForm.get('description'))"
+          label="Project Description"
+        ></app-text-input>
+        <br />
+        <div  class="select-container">
+          <ng-container *ngIf="user?.admin === true && mode !== 'new'">
+            <label for="activeSelect">Active?</label>
+            <select id="activeSelect" formControlName="active">
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </ng-container>
+          <button
+            class="inputs button"
+            id="modal-submit-btn"
+            type="submit"
+            [disabled]="editProjectForm.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </app-overlay>
+  <div class="projects">
+    <div class="projects-heading">
+      <div class="projects-heading-left">
+        <button (click)="goBack()">&lt; Back</button>
+      </div>
+      <div class="projects-heading-right">
+      <h1>Projects for {{ teamName }} </h1>
+      </div>
+    </div>
+    <div class="projects-body">
+      <button *ngIf="user?.admin === true" (click)="showProjectModal('new', 0)"  id="new-project-button">New</button>
+      <div *ngFor="let project of projects" class="project">
+        <div class="project-left">
+          <div class="project-heading">
+            <h2>{{ project.name }}</h2>
+            <p [ngClass]="{'active': project.active, 'inactive': !project.active}">
+              {{ project.active ? 'Active' : 'Inactive' }}</p>
+          </div>
+          <div class="project-body">
+            <p>{{ project.description }}</p>
+          </div>
+        </div>
+        <div class="project-right">
+          <button (click)="showProjectModal('edit', project?.id)">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
